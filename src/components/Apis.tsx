@@ -1,32 +1,23 @@
 import * as React from 'react';
-import type { DataSourceData } from '../data-types';
+import type { ApiData } from '../data-types';
 import { timestamp } from '../lib/format';
 import { useLongPoll } from '../lib/useLongPoll';
 import { Section } from './_common/Section';
 
-export const DataSources: React.FC = function DataSources() {
-  const dataSources = useLongPoll<DataSourceData[]>(`/api/data-sources`, []);
-  const sources = dataSources
-    .flatMap(({ name, sourceLastTouched, sourceLastUpdated }) => {
-      const paths = Object.keys(sourceLastUpdated);
-      return paths.map((path) => [name, path, sourceLastUpdated[path], sourceLastTouched[path]]);
+export const APIs: React.FC = function DataSources() {
+  const apis = useLongPoll<ApiData[]>(`/api/apis`, []);
+  const normalizedApis = apis
+    .flatMap(({ name, lastTouched, lastUpdated, apiType }) => {
+      const paths = Object.keys(lastTouched);
+      return paths.map((path) => [name, path, lastUpdated[path], lastTouched[path], apiType]);
     })
     .sort(([name1, path1], [name2, path2]) => {
       const a = (name1 as string) + (path1 as string);
       const b = (name2 as string) + (path2 as string);
       return a > b ? 1 : a === b ? 0 : -1;
     });
-  const targets = dataSources
-    .flatMap(({ name, targetLastTouched, targetLastUpdated }) => {
-      const paths = Object.keys(targetLastUpdated);
-      return paths.map((path) => [name, path, targetLastUpdated[path], targetLastTouched[path]]);
-    })
-    .sort(([name1, path1], [name2, path2]) => {
-      const a = (name1 as string) + (path1 as string);
-      const b = (name2 as string) + (path2 as string);
-      return a > b ? 1 : a === b ? 0 : -1;
-    });
-
+  const sources = normalizedApis.filter((x) => x[4] === 'source');
+  const targets = normalizedApis.filter((x) => x[4] === 'target');
   return (
     <div className="mr-4 grid grid-cols-2 gap-x-12">
       <Section title="SOURCES" className="p-4">

@@ -22,12 +22,11 @@ export interface SessionData {
   inQueue: number;
 }
 
-export interface DataSourceData {
+export interface ApiData {
   name: string;
-  sourceLastUpdated: Record<string, number | null>;
-  sourceLastTouched: Record<string, number | null>;
-  targetLastUpdated: Record<string, number | null>;
-  targetLastTouched: Record<string, number | null>;
+  apiType: 'source' | 'target';
+  lastUpdated: Record<string, number | null>;
+  lastTouched: Record<string, number | null>;
 }
 
 export interface TaskData {

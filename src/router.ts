@@ -1,5 +1,5 @@
 import { Credentials } from './components/Credentials';
-import { DataSources } from './components/DataSources';
+import { APIs } from './components/Apis';
 import { Logs } from './components/Logs';
 import { Sessions } from './components/Sessions';
 import { Tasks } from './components/Tasks';
@@ -10,7 +10,7 @@ export const routes = {
   '/credentials': route({ name: 'CREDENTIALS', component: Credentials }),
   '/logs': route({ name: 'LOGS', component: Logs }),
   '/sessions': route({ name: 'SESSIONS', component: Sessions }),
-  '/data-sources': route({ name: 'DATA SOURCES', component: DataSources }),
+  '/apis': route({ name: 'DATA SOURCES', component: APIs }),
   '/tasks': route({ name: 'TASKS', component: Tasks }),
 } as const;
 

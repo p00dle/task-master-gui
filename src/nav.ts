@@ -7,6 +7,6 @@ export const navigation: Navigation<AllRoutes> = [
   nav({ name: 'LOGS', route: '/logs' }),
   nav({ name: 'CREDENTIALS', route: '/credentials' }),
   nav({ name: 'SESSIONS', route: '/sessions' }),
-  nav({ name: 'DATA SOURCES', route: '/data-sources' }),
+  nav({ name: 'APIS', route: '/apis' }),
   nav({ name: 'TASKS', route: '/tasks' }),
 ];
