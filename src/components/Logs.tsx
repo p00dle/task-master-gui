@@ -50,7 +50,7 @@ export const Logs: React.FC = function Logs() {
           DOWNLOAD
         </a>
       </div>
-      <div>
+      <div className="h-[calc(100vh_-_10rem)] overflow-y-auto">
         <table className="table-fixed w-full border-collapse border-1">
           <thead className="tertiary text-left text-lg">
             <tr className="border-y-1">

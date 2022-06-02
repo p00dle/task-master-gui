@@ -658,6 +658,10 @@ input[type='checkbox'].form-control:checked:after {
   height: 24rem;
 }
 
+.h-\[calc\(100vh_-_10rem\)\] {
+  height: calc(100vh - 10rem);
+}
+
 .h-8 {
   height: 2rem;
 }
@@ -765,12 +769,12 @@ input[type='checkbox'].form-control:checked:after {
           user-select: none;
 }
 
-.grid-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .grid-cols-\[14rem_1fr\] {
@@ -856,6 +860,10 @@ input[type='checkbox'].form-control:checked:after {
   overflow-x: auto;
 }
 
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
 .overflow-y-scroll {
   overflow-y: scroll;
 }
@@ -916,12 +924,12 @@ input[type='checkbox'].form-control:checked:after {
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
-.p-8 {
-  padding: 2rem;
-}
-
 .p-4 {
   padding: 1rem;
+}
+
+.p-8 {
+  padding: 2rem;
 }
 
 .p-2 {
