@@ -21,7 +21,7 @@ const LogModal: React.FC<ModalProps<LogData>> = function LogModal({ props: log }
         </div>
         <div className="min-w-[18rem] border-1 rounded-t-lg m-4 secondary">
           <div className="tertiary p-2 rounded-t-lg">NAMESPACE</div>
-          <div className="secondary p-2">{log.namespace.replace(/\./g, ' > ')}</div>
+          <div className="secondary p-2">{log.namespace.toUpperCase().replace(/\./g, ' > ')}</div>
         </div>
       </div>
       <div className="w-inherit border-1 rounded-t-lg m-4">
@@ -70,7 +70,7 @@ export const Logs: React.FC = function Logs() {
                 >
                   <td className="px-4 h-8">{timestamp(log.timestamp)}</td>
                   <td className="px-4">{log.logLevel.toUpperCase()}</td>
-                  <td className="px-4">{log.namespace.replace(/\./g, ' > ')}</td>
+                  <td className="px-4">{log.namespace.toUpperCase().replace(/\./g, ' > ')}</td>
                   <td className="px-4">{limitString(log.message, 110)}</td>
                 </tr>
               );
