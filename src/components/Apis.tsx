@@ -7,9 +7,11 @@ import { Section } from './_common/Section';
 export const APIs: React.FC = function DataSources() {
   const apis = useLongPoll<ApiData[]>(`/api/apis`, []);
   const normalizedApis = apis
-    .flatMap(({ name, lastTouched, lastUpdated, apiType }) => {
-      const paths = Object.keys(lastTouched);
-      return paths.map((path) => [name, path, lastUpdated[path], lastTouched[path], apiType]);
+    .flatMap(({ name, sourcesLastTouched, sourcesLastUpdated, targetsLastTouched, targetsLastUpdated }) => {
+      return [
+        ...Object.keys(sourcesLastTouched).map((path) => [name, path, sourcesLastUpdated[path], sourcesLastTouched[path], 'source']),
+        ...Object.keys(targetsLastTouched).map((path) => [name, path, targetsLastUpdated[path], targetsLastTouched[path], 'target']),
+      ];
     })
     .sort(([name1, path1], [name2, path2]) => {
       const a = (name1 as string) + (path1 as string);

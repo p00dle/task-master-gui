@@ -24,9 +24,12 @@ export interface SessionData {
 
 export interface ApiData {
   name: string;
-  apiType: 'source' | 'target';
-  lastUpdated: Record<string, number | null>;
-  lastTouched: Record<string, number | null>;
+  status: 'In Use' | 'Ready';
+  inQueue: number;
+  sourcesLastUpdated: Record<string, number | null>;
+  sourcesLastTouched: Record<string, number | null>;
+  targetsLastUpdated: Record<string, number | null>;
+  targetsLastTouched: Record<string, number | null>;
 }
 
 export interface TaskData {
