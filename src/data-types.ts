@@ -23,13 +23,15 @@ export interface SessionData {
 }
 
 export interface ApiData {
+  usedAsSource: false;
+  usedAsTarget: false;
   name: string;
   status: 'In Use' | 'Ready';
   inQueue: number;
-  sourcesLastUpdated: Record<string, number | null>;
-  sourcesLastTouched: Record<string, number | null>;
-  targetsLastUpdated: Record<string, number | null>;
-  targetsLastTouched: Record<string, number | null>;
+  sourceLastUpdated: number | null;
+  sourceLastTouched: number | null;
+  targetLastUpdated: number | null;
+  targetLastTouched: number | null;
 }
 
 export interface TaskData {

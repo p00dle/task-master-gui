@@ -16,12 +16,7 @@ interface ModalContextState {
   shouldShow: boolean;
   modalProps: any;
   modalClassName: string;
-  showModal: <T>(
-    title: string | null,
-    component: ModalComponent<ModalProps<T>>,
-    props?: T,
-    modalClassName?: string
-  ) => void;
+  showModal: <T>(title: string | null, component: ModalComponent<ModalProps<T>>, props?: T, modalClassName?: string) => void;
   hideModal: () => void;
 }
 
@@ -73,12 +68,7 @@ const initialModalContextState: ModalContextState = {
 
 export const ModalContext = createContext<ModalContextState>(initialModalContextState);
 
-export function useModal<T>(
-  title: string | null,
-  component: ModalComponent<ModalProps<T>>,
-  props?: T,
-  modalClassName = ''
-) {
+export function useModal<T>(title: string | null, component: ModalComponent<ModalProps<T>>, props?: T, modalClassName = '') {
   const context = useContext(ModalContext);
   if (context === undefined) {
     throw new Error('useModal must be used within a ModalProvider');
@@ -86,13 +76,7 @@ export function useModal<T>(
   const { showModal } = context;
   return (updatedProps?: T) => {
     const isEvent = updatedProps && '_reactName' in updatedProps && 'target' in updatedProps;
-    const modalProps = isEvent
-      ? props
-      : updatedProps && props
-      ? { ...props, ...updatedProps }
-      : updatedProps
-      ? updatedProps
-      : props;
+    const modalProps = isEvent ? props : updatedProps && props ? { ...props, ...updatedProps } : updatedProps ? updatedProps : props;
     showModal(title, component, modalProps, modalClassName);
   };
 }
@@ -117,10 +101,7 @@ export const Modal: React.FC = function Modal() {
   return (
     <React.Fragment>
       <dialog
-        className={
-          'absolute h-screen opacity-30 dark:opacity-50 bg-black w-screen top-0 left-0 z-30 ' +
-          (shouldShow ? 'block' : 'hidden')
-        }
+        className={'absolute h-screen opacity-30 dark:opacity-50 bg-black w-screen top-0 left-0 z-30 ' + (shouldShow ? 'block' : 'hidden')}
         onClick={hideModal}
       />
       <dialog

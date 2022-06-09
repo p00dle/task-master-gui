@@ -2,10 +2,7 @@ import * as React from 'react';
 import { ModalProps, useModal } from '../layout/Modal';
 import { Button } from './Button';
 
-const ConfirmModal: React.FC<ModalProps<{ text: string; onConfirm: () => void }>> = function ConfirmModal({
-  hideModal,
-  props,
-}) {
+const ConfirmModal: React.FC<ModalProps<{ text: string; onConfirm: () => void }>> = function ConfirmModal({ hideModal, props }) {
   function confirm() {
     hideModal();
     props.onConfirm();

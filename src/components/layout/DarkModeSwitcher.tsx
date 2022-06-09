@@ -31,10 +31,7 @@ export const DarkModeSwitcher: React.FC = function DarkModeSwitcher() {
     <label className="block cursor-pointer">
       <input type="checkbox" name="" className="hidden" onClick={toggleDarkMode} />
       <div
-        className={
-          'w-12 h-7 flex items-center secondary rounded-full p2 transition-all ' +
-          (darkMode ? 'flex-row-reverse' : 'flex-row')
-        }
+        className={'w-12 h-7 flex items-center secondary rounded-full p2 transition-all ' + (darkMode ? 'flex-row-reverse' : 'flex-row')}
       >
         <div className="w-6 h-6 sidebar rounded-full shadow flex items-center justify-center transition-all">
           <span className="text-lg">{darkMode ? '\u263D' : '\u2600'}</span>

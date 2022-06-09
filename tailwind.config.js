@@ -1,16 +1,14 @@
 module.exports = {
-  content: [
-    "src/**/*.tsx",
-  ],
+  content: ['src/**/*.tsx'],
   darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        "white": "#ffffff",
+        white: '#ffffff',
       },
     },
   },
   plugins: [
     // require('postcss-import'),
   ],
-}
+};

@@ -10,13 +10,7 @@ type LinkParams<R extends keyof AllRoutes> = {
   onClick?: () => void;
 };
 
-export const Link = function Home<R extends keyof AllRoutes>({
-  route,
-  params,
-  children,
-  className = '',
-  onClick,
-}: LinkParams<R>) {
+export const Link = function Home<R extends keyof AllRoutes>({ route, params, children, className = '', onClick }: LinkParams<R>) {
   const { updateRoute, stringifyRoute } = useRouter();
   const onLinkClick = (event: React.MouseEvent) => {
     updateRoute(route, params as any);

@@ -6,35 +6,27 @@ import { Section } from './_common/Section';
 
 export const APIs: React.FC = function DataSources() {
   const apis = useLongPoll<ApiData[]>(`/api/apis`, []);
-  const normalizedApis = apis
-    .flatMap(({ name, sourcesLastTouched, sourcesLastUpdated, targetsLastTouched, targetsLastUpdated }) => {
-      return [
-        ...Object.keys(sourcesLastTouched).map((path) => [name, path, sourcesLastUpdated[path], sourcesLastTouched[path], 'source']),
-        ...Object.keys(targetsLastTouched).map((path) => [name, path, targetsLastUpdated[path], targetsLastTouched[path], 'target']),
-      ];
-    })
-    .sort(([name1, path1], [name2, path2]) => {
-      const a = (name1 as string) + (path1 as string);
-      const b = (name2 as string) + (path2 as string);
-      return a > b ? 1 : a === b ? 0 : -1;
-    });
-  const sources = normalizedApis.filter((x) => x[4] === 'source');
-  const targets = normalizedApis.filter((x) => x[4] === 'target');
+  const sources: [string, number | null, number | null][] = [];
+  const targets: [string, number | null, number | null][] = [];
+  for (const api of apis) {
+    if (api.usedAsSource) sources.push([api.name, api.sourceLastUpdated, api.sourceLastTouched]);
+    if (api.usedAsTarget) targets.push([api.name, api.targetLastUpdated, api.targetLastTouched]);
+  }
+  sources.sort(([a], [b]) => (a > b ? 1 : a === b ? 0 : -1));
+  targets.sort(([a], [b]) => (a > b ? 1 : a === b ? 0 : -1));
   return (
     <div className="mr-4 grid grid-cols-2 gap-x-12">
       <Section title="SOURCES" className="p-4">
         <table className="table w-full border-collapse border-1">
           <thead className="tertiary text-left text-lg">
             <td className="px-4 py-2">SOURCE</td>
-            <td className="w-32 px-4 py-2">TYPE</td>
             <td className="w-48 px-4 py-2">LAST UPDATED</td>
             <td className="w-48 px-4 py-2">LAST TOUCHED</td>
           </thead>
           <tbody>
-            {sources.map(([name, path, lastUpdated, lastTouched]) => (
-              <tr key={name + '/' + path}>
+            {sources.map(([name, lastUpdated, lastTouched]) => (
+              <tr key={name}>
                 <td className="px-4 h-12">{name}</td>
-                <td className="px-4 h-12">{path}</td>
                 <td className="px-4 h-12">{timestamp(lastUpdated)}</td>
                 <td className="px-4 h-12">{timestamp(lastTouched)}</td>
               </tr>
@@ -46,15 +38,13 @@ export const APIs: React.FC = function DataSources() {
         <table className="table w-full border-collapse border-1">
           <thead className="tertiary text-left text-lg">
             <td className="px-4 py-2">TARGET</td>
-            <td className="w-32 px-4 py-2">TYPE</td>
             <td className="w-48 px-4 py-2">LAST UPDATED</td>
             <td className="w-48 px-4 py-2">LAST TOUCHED</td>
           </thead>
           <tbody>
-            {targets.map(([name, path, lastUpdated, lastTouched]) => (
-              <tr key={name + '/' + path}>
+            {targets.map(([name, lastUpdated, lastTouched]) => (
+              <tr key={name}>
                 <td className="px-4 h-12">{name}</td>
-                <td className="px-4 h-12">{path}</td>
                 <td className="px-4 h-12">{timestamp(lastUpdated)}</td>
                 <td className="px-4 h-12">{timestamp(lastTouched)}</td>
               </tr>
